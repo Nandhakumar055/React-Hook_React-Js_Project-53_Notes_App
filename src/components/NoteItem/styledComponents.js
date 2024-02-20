@@ -24,4 +24,5 @@ export const Title = styled.h1`
 export const NoteText = styled.p`
   font-size: 16px;
   line-height: 25px;
+  margin-top: 0px;
 `

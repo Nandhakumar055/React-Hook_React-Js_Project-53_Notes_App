@@ -33,19 +33,34 @@ export const UserTitle = styled.input`
   border: none;
   width: 100%;
   max-width: 400px;
-  margin: 10px 0px;
-  outline-color: orange;
+  margin-top: 10px;
+  outline-color: #4c63b6;
   font-weight: 500;
+  border: solid 2px ${props => props.isError};
+  border-top: none;
+  border-right: none;
+  border-radius: 4px;
 `
+
 export const UserNote = styled.textarea`
   padding: 10px;
   border: none;
   width: 100%;
   max-width: 400px;
   height: 100px;
-  margin: 10px 0px;
-  outline-color: orange;
+  margin-top: 20px;
+  outline-color: #4c63b6;
   font-weight: 500;
+  border: solid 2px ${props => props.isError};
+  border-radius: 4px;
+  border-top: none;
+  border-right: none;
+`
+
+export const ErrorMsg = styled.p`
+  font-size: 12px;
+  color: red;
+  margin: 10px 0px;
 `
 
 export const AddButton = styled.button`

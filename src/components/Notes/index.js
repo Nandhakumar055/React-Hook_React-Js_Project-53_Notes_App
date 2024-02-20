@@ -10,6 +10,7 @@ import {
   CreateNoteCardContainer,
   UserTitle,
   UserNote,
+  ErrorMsg,
   AddButton,
   EmptyMainContainer,
   EmptyContainer,
@@ -23,6 +24,8 @@ const Notes = () => {
   const [userTitle, setUserTitle] = useState('')
   const [userNote, setUserNote] = useState('')
   const [notesList, setNotList] = useState([])
+  const [isTitleError, setTitleError] = useState(false)
+  const [isNoteError, setNoteError] = useState(false)
 
   const isEmptyNots = notesList.length === 0
 
@@ -38,14 +41,31 @@ const Notes = () => {
       note: userNote,
     }
 
-    if (userTitle !== undefined && userNote !== undefined) {
+    if (userTitle !== '' && userNote !== '') {
       setNotList(prevState => [...prevState, addNewNoteItem])
       setUserTitle('')
       setUserNote('')
+      setTitleError(false)
+      setNoteError(false)
+    } else {
+      if (userTitle === '') {
+        setTitleError(true)
+      } else {
+        setTitleError(false)
+      }
+
+      if (userNote === '') {
+        setNoteError(true)
+      } else {
+        setNoteError(false)
+      }
     }
   }
 
-  console.log(notesList)
+  const titleError = isTitleError ? 'red' : 'white'
+  const noteError = isNoteError ? 'red' : 'white'
+
+  console.log(titleError, noteError)
 
   return (
     <NotesMainContainer>
@@ -57,13 +77,17 @@ const Notes = () => {
             placeholder="Title"
             onChange={onChangeTitle}
             value={userTitle}
+            isError={titleError}
           />
+          {isTitleError && <ErrorMsg>*Please enter your Title</ErrorMsg>}
           <UserNote
             type="text"
             placeholder="Take a Note..."
             onChange={onChangeNote}
             value={userNote}
+            isError={noteError}
           />
+          {isNoteError && <ErrorMsg>*Please enter your Note</ErrorMsg>}
           <AddButton type="submit">Add</AddButton>
         </CreateNoteCardContainer>
         {isEmptyNots ? (
